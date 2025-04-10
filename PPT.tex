@@ -57,35 +57,35 @@
 \section{列表的创建}
 
 % 方式1：直接创建
-\begin{frame}[fragile]{创建方式1：直接定义}
+\begin{frame}[fragile]{创建方式 $1$-直接定义}
 \begin{exampleblock}{使用方括号直接创建}
 \begin{lstlisting}[language=Python]
-动画角色 = ["皮卡丘", "哆啦A梦", "孙悟空"]
-成绩单 = [98, 87, 92, 85] 
-混合列表 = ["苹果", 3, True]
+list_a = ["皮卡丘","哆啦A梦","孙悟空"]
+list_b = [98,87,92,85] 
+list_c = ["苹果",3,True]
 \end{lstlisting}
 \end{exampleblock}
 
 \end{frame}
 
 % 方式2：类型转换 
-\begin{frame}[fragile]{创建方式2：类型转换}
+\begin{frame}[fragile]{创建方式 $2$-类型转换}
 \begin{exampleblock}{$\texttt{list ()}$ 转换}
 \begin{lstlisting}[language=Python]
 list_a = list("abc") # ['a', 'b', 'c']
-list_b = list((4, 5, 6)) # [4, 5, 6]
+list_b = list((4,5,6)) # [4, 5, 6]
 \end{lstlisting}
 \end{exampleblock}
 
 \end{frame}
 
 % 方式3：range
-\begin{frame}[fragile]{创建方式3： $\texttt{range}$ 生成}
+\begin{frame}[fragile]{创建方式 $3$- $\texttt{range}$ 生成}
 \begin{exampleblock}{$\texttt{range (start,end[,step])}$}
 \begin{lstlisting}[language=Python]
 list_a = list(range(3)) # [0, 1, 2]
 list_b = list(range(3,7)) # [3, 4, 5, 6]
-list_c = list(range(9,3,-2)) # [7, 5, 3]
+list_c = list(range(9,3,-2)) # [9, 7, 5]
 \end{lstlisting}
 \end{exampleblock}
 
@@ -96,11 +96,11 @@ list_c = list(range(9,3,-2)) # [7, 5, 3]
 \begin{frame}[fragile]{访问列表元素}
 \begin{block}{基础索引}
 \begin{lstlisting}[language=Python]
-学生 = ["张三", "李四", "王五", "赵六"]
+stu = ["张三","李四","王五","赵六"]
 
 # 获取单个元素
-print(学生[0])  # 输出: "张三" 
-print(学生[-1]) # 输出: "赵六" (倒数第一个)
+print(stu[0])  # 输出: "张三" 
+print(stu[-1]) # 输出: "赵六" (倒数第一个)
 \end{lstlisting}
 \begin{itemize}
 \item 索引从\colorbox{cuhksz3}{0}开始计数
@@ -119,13 +119,13 @@ print(学生[-1]) # 输出: "赵六" (倒数第一个)
 
 \begin{exampleblock}{实际应用}
 \begin{lstlisting}[language=Python]
-数字 = [0,1,2,3,4,5,6,7,8,9]
+num = [0,1,2,3,4,5,6,7,8,9]
 
-print(数字[2:5])   # [2,3,4] (含头不含尾)
-print(数字[:3])    # [0,1,2] (省略开始)
-print(数字[6:])    # [6,7,8,9] (省略结束)
-print(数字[::2])   # [0,2,4,6,8] (步长为2)
-print(数字[::-1])  # 逆序 [9,8,...,0]
+print(num[2:5])   # [2,3,4] (左闭右开)
+print(num[:3])    # [0,1,2] (省略开始)
+print(num[6:])    # [6,7,8,9] (省略结束)
+print(num[::2])   # [0,2,4,6,8] (步长为2)
+print(num[::-1])  # 逆序 [9,8,...,0]
 \end{lstlisting}
 \end{exampleblock}
 \end{frame}
@@ -193,7 +193,7 @@ print(lst[1:4])   # ['B','C','D']
 \begin{lstlisting}[language=Python]
 print(num[::2])    # 偶数索引
 inv = num[::-1]
-print(num[5:15:3]) # 步长3
+print(num[5:16:3]) # 步长3
 \end{lstlisting}
 \end{block}
 \end{frame}
@@ -202,13 +202,13 @@ print(num[5:15:3]) # 步长3
 \section{列表操作符}
 \begin{frame}[fragile]{列表的操作符}
 \begin{block}{列表的运算符重载}
-\begin{tabular}{|l|l|p{3cm}|}
+\begin{tabular}{|l|l|p{2cm}|}
 \hline
 \textcolor{cuhksz1}{表达式} & \textcolor{cuhksz1}{结果} & \textcolor{cuhksz1}{描述} \\ \hline
-\lstinline|[1,2,3] + [4,5]| & [1,2,3,4,5] & 列表拼接（组合）\\ \hline
-\lstinline|['A'] * 3| & ['A','A','A'] & 列表重复\\ \hline
-\lstinline|3 in [1,2,3]| & True & 成员检测\\ \hline
-\lstinline|for x in [1,2,3]: print(x)| & 1 2 3 & 迭代遍历\\ \hline
+\lstinline|[1,2,3] + [4,5]| & \lstinline|[1,2,3,4,5]| & 列表拼接\\ \hline
+\lstinline|['A','B'] * 3| & \lstinline|['A','B','A','B']| & 列表重复\\ \hline
+\lstinline|3 in [1,2,3]| & \lstinline|True| & 成员检测\\ \hline
+\lstinline|for x in [1,2,3]: print(x)| & \lstinline|1 2 3| & 迭代遍历\\ \hline
 \end{tabular}
 \end{block}
 \end{frame}
@@ -216,7 +216,7 @@ print(num[5:15:3]) # 步长3
 \section{列表的函数}
 \begin{frame}[fragile]{列表的三大核心函数}
 \begin{columns}[T]
-\column{0.5\textwidth}
+\column{0.4\textwidth}
 \begin{block}{基础函数}
 \begin{tabular}{|l|l|}
 \hline
@@ -230,10 +230,10 @@ print(num[5:15:3]) # 步长3
 \column{0.6\textwidth}
 \begin{exampleblock}{实战应用}
 \begin{lstlisting}[language=Python]
-成绩 = [88, 92, 79, 95]
-print("人数:", len(成绩))
-print("最高分:", max(成绩))
-print("最低分:", min(成绩))
+grade = [88,92,79,95]
+print("人数:",len(grade))
+print("最高分:",max(grade))
+print("最低分:",min(grade))
 \end{lstlisting}
 \end{exampleblock}
 \end{columns}
@@ -247,19 +247,19 @@ print("最低分:", min(成绩))
 \end{frame}
 
 \begin{frame}[fragile]{综合挑战}
-\begin{block}{挑战1：密码生成器}
+\begin{block}{挑战 $1$-密码生成器}
 \begin{lstlisting}[language=Python]
-片段 = ['A','2','#']
-密码 = 片段 * 2 + ['9','z']
-print("".join(密码))  # 输出应该是？
+p = ['A','2','#']
+password = p * 2 + ['9','z']
+print("".join(password))  # 输出应该是？
 \end{lstlisting}
 \end{block}
 
-\begin{block}{挑战2：成绩分析}
+\begin{block}{挑战 $2$-成绩分析}
 \begin{lstlisting}[language=Python]
-成绩单 = [85, 92, 78] + [90, 88]
-print("平均:", sum(成绩单)/len(成绩单))
-print("差距:", max(成绩单)-min(成绩单))
+grade = [85, 92, 78] + [90, 88]
+print("平均:", sum(grade)/len(grade))
+print("差距:", max(grade)-min(grade))
 \end{lstlisting}
 \end{block}
 \end{frame}
@@ -270,17 +270,17 @@ print("差距:", max(成绩单)-min(成绩单))
 
 \begin{block}{$\texttt{append()}$ - 添加元素}
 \begin{lstlisting}[language=Python]
-购物车 = []
-购物车.append("牛奶")
-购物车.append("面包")
+shopping = []
+shopping.append("牛奶")
+shopping.append("面包")
 # ['牛奶', '面包']
 \end{lstlisting}
 \end{block}
 
 \begin{block}{$\texttt{count()}$ - 元素计数}
 \begin{lstlisting}[language=Python]
-成绩 = [85, 90, 85, 88, 90, 85]
-print(成绩.count(85))  # 输出 3
+grade = [85,90,85,88,90,85]
+print(grade.count(85))  # 输出 3
 \end{lstlisting}
 \end{block}
 \end{frame}
@@ -289,17 +289,17 @@ print(成绩.count(85))  # 输出 3
 
 \begin{block}{$\texttt{index()}$ - 查找位置}
 \begin{lstlisting}[language=Python]
-水果 = ["苹果","香蕉","橙子"]
-print(水果.index("香蕉"))  # 输出 1
+fruit = ["苹果","香蕉","橙子"]
+print(fruit.index("香蕉"))  # 输出 1
 # 找不到会引发ValueError
 \end{lstlisting}
 \end{block}
 
 \begin{block}{$\texttt{pop()}$ - 移除元素}
 \begin{lstlisting}[language=Python]
-待办事项 = ["作业","购物","洗衣"]
-完成 = 待办事项.pop(1) 
-# 完成="购物", 剩余=["作业","洗衣"]
+do = ["作业","购物","洗衣"]
+end = do.pop(1) 
+# end="购物", do=["作业","洗衣"]
 \end{lstlisting}
 \end{block}
 
@@ -309,18 +309,18 @@ print(水果.index("香蕉"))  # 输出 1
 
 \begin{block}{$\texttt{remove()}$ - 删除匹配项}
 \begin{lstlisting}[language=Python]
-宠物 = ["狗","猫","鸟","猫"]
-宠物.remove("猫")  
-print (宠物) # ["狗","鸟","猫"]
+animal = ["狗","猫","鸟","猫"]
+animal.remove("猫")  
+print (animal) # ["狗","鸟","猫"]
 # 只删除第一个匹配项
 \end{lstlisting}
 \end{block}
 
 \begin{block}{$\texttt{reverse()}$ - 反转列表}
 \begin{lstlisting}[language=Python]
-数字 = [1,2,3,4]
-数字.reverse()
-print(数字)  # [4,3,2,1]
+num = [1,2,3,4]
+num.reverse()
+print(num)  # [4,3,2,1]
 \end{lstlisting}
 \end{block}
 
@@ -330,9 +330,11 @@ print(数字)  # [4,3,2,1]
 
 \begin{block}{$\texttt{sort()}$ - 列表排序}
 \begin{lstlisting}[language=Python]
-成绩 = [88, 92, 75, 85]
-成绩.sort()  # 默认升序
-print(成绩)  # [75, 85, 88, 92]
+grade = [88,92,75,85]
+grade.sort()  # 默认升序
+print(grade)  # [75, 85, 88, 92]
+grade.sort (reverse=True) # 降序
+print(grade) # [92, 88, 85, 75]
 \end{lstlisting}
 \end{block}
 
