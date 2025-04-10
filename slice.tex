@@ -1,0 +1,40 @@
+\definecolor{myblue}{rgb}{0.12,0.56,1}
+\definecolor{myred}{rgb}{1,0.19,0.32}
+\definecolor{mygreen}{rgb}{0.3,0.7,0.3}
+
+\begin{center}
+\setlength{\arrayrulewidth}{0.5pt}
+\renewcommand{\arraystretch}{1.2}
+
+% 主表格容器
+\begin{tikzpicture}
+% 原始数据表格
+\node (table) {
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+索引 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ 
+\hline
+值 & 
+0 & 
+\textcolor{myred}{1} & 
+\cellcolor{myblue!30}2 & 
+\cellcolor{myblue!30}\textcolor{myred}{3} & 
+\cellcolor{myblue!30}4 & 
+\textcolor{myred}{5} & 
+6 & 
+\textcolor{myred}{7} & 
+8 & 
+9 \\ 
+\hline
+\end{tabular}
+};
+
+
+% 绘制绿色大括号
+\draw[mygreen,line width=1.2pt,decorate,decoration={brace,amplitude=8pt,mirror}]
+(table.south west) ++ (1.4cm,0) -- 
+node[below=3mm,text=mygreen]{逆序区间} 
+(table.south east);
+\end{tikzpicture}
+
+\end{center}

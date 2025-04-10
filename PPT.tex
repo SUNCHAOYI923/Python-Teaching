@@ -1,0 +1,350 @@
+\documentclass{beamer}
+\usepackage[table]{xcolor}
+\usepackage{array,multirow}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{ctex, hyperref}
+\usepackage[T1]{fontenc}
+
+% other packages
+\usepackage{latexsym,amsmath,xcolor,multicol,booktabs,calligra}
+\usepackage{graphicx,pstricks,listings,stackengine}
+
+
+\title{$\texttt{Python}$ 第三课}
+\subtitle{列表 $\texttt{(list)}$}
+\institute{香港中文大学(深圳) \ 数据科学学院}
+\date{2025 年 4 月 12 日}
+\author{蒋一歌\ 孙超逸}
+\usepackage{CUHKSZ}
+
+% defs
+\def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
+\def\env#1{\texttt{\color{blue}\footnotesize #1}}
+\xdefinecolor{cuhksz1}{rgb}{0.457,0.0585,0.42578}      %RGB(117,15,109)
+\xdefinecolor{cuhksz2}{rgb}{0.86328,0.63671875,0}      %RGB(221,163,0)
+\xdefinecolor{cuhksz3}{rgb}{0.953125,0.87109,0.6875}   %RGB(244,223,176)
+
+
+\definecolor{deepred}{rgb}{0.6,0,0}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\bfseries\color{cuhksz1},
+    emphstyle=\ttfamily\color{deepred},    % Custom highlighting style
+    stringstyle=\color{cuhksz2},
+    numbers=left,
+    numberstyle=\small\color{cuhksz3},
+    rulesepcolor=\color{red!20!green!20!blue!20},
+    frame=shadowbox,
+}
+
+
+\begin{document}
+
+\kaishu
+\begin{frame}
+    \titlepage
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[width=0.3\linewidth]{pic/CUHKSZ-Logo.pdf}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+
+
+\section{列表的创建}
+
+% 方式1：直接创建
+\begin{frame}[fragile]{创建方式1：直接定义}
+\begin{exampleblock}{使用方括号直接创建}
+\begin{lstlisting}[language=Python]
+动画角色 = ["皮卡丘", "哆啦A梦", "孙悟空"]
+成绩单 = [98, 87, 92, 85] 
+混合列表 = ["苹果", 3, True]
+\end{lstlisting}
+\end{exampleblock}
+
+\end{frame}
+
+% 方式2：类型转换 
+\begin{frame}[fragile]{创建方式2：类型转换}
+\begin{exampleblock}{$\texttt{list ()}$ 转换}
+\begin{lstlisting}[language=Python]
+list_a = list("abc") # ['a', 'b', 'c']
+list_b = list((4, 5, 6)) # [4, 5, 6]
+\end{lstlisting}
+\end{exampleblock}
+
+\end{frame}
+
+% 方式3：range
+\begin{frame}[fragile]{创建方式3： $\texttt{range}$ 生成}
+\begin{exampleblock}{$\texttt{range (start,end[,step])}$}
+\begin{lstlisting}[language=Python]
+list_a = list(range(3)) # [0, 1, 2]
+list_b = list(range(3,7)) # [3, 4, 5, 6]
+list_c = list(range(9,3,-2)) # [7, 5, 3]
+\end{lstlisting}
+\end{exampleblock}
+
+\end{frame}
+
+
+\section{列表索引与切片}
+\begin{frame}[fragile]{访问列表元素}
+\begin{block}{基础索引}
+\begin{lstlisting}[language=Python]
+学生 = ["张三", "李四", "王五", "赵六"]
+
+# 获取单个元素
+print(学生[0])  # 输出: "张三" 
+print(学生[-1]) # 输出: "赵六" (倒数第一个)
+\end{lstlisting}
+\begin{itemize}
+\item 索引从\colorbox{cuhksz3}{0}开始计数
+\item 负数索引表示\colorbox{cuhksz3}{从后向前}访问
+\item 越界访问会引发\colorbox{cuhksz3}{IndexError}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{神奇的切片操作}
+\begin{block}{切片语法}
+\centering
+\texttt{列表[开始:结束:步长]}
+\end{block}
+
+\begin{exampleblock}{实际应用}
+\begin{lstlisting}[language=Python]
+数字 = [0,1,2,3,4,5,6,7,8,9]
+
+print(数字[2:5])   # [2,3,4] (含头不含尾)
+print(数字[:3])    # [0,1,2] (省略开始)
+print(数字[6:])    # [6,7,8,9] (省略结束)
+print(数字[::2])   # [0,2,4,6,8] (步长为2)
+print(数字[::-1])  # 逆序 [9,8,...,0]
+\end{lstlisting}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{神奇的切片操作}
+\input{silce.tex}
+\begin{itemize}
+\item \textcolor{blue}{蓝色}：$[2:5] \to [2,3,4]$
+\item \textcolor{red}{红色}：$[1:8:2] \to [1,3,5,7]$
+\item \textcolor{green}{绿色}：$[::-1]  \to \text{逆序}$
+\end{itemize}
+\begin{alertblock}{注意}
+\begin{itemize}
+\item 产生\colorbox{cuhksz3}{新列表}不影响原数据
+\item 结束索引\colorbox{cuhksz3}{不包含}在结果中
+\item 步长可为负数实现\colorbox{cuhksz3}{逆序}
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{实战练习}
+\begin{block}{基础练习}
+\begin{lstlisting}[language=Python]
+lst = ['A','B','C','D','E','F']
+
+# 1. 获取前3个字母
+print(lst[_____])
+
+# 2. 获取最后2个字母
+print(lst[_____])
+
+# 3. 获取B到D的子列表
+print(lst[_____])
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{实战练习}
+\begin{block}{进阶挑战}
+\begin{lstlisting}[language=Python]
+num = list(range(20))
+
+# 1. 获取所有偶数索引的元素
+print(num[_____])
+
+# 2. 创建逆序列表
+inv = num[_____]
+
+# 3. 获取第5到第15的元素，步长3
+print(num[_____])
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{参考答案}
+\begin{block}{基础练习答案}
+\begin{lstlisting}[language=Python]
+print(lst[:3])    # ['A','B','C']
+print(lst[-2:])   # ['E','F'] 
+print(lst[1:4])   # ['B','C','D']
+\end{lstlisting}
+\end{block}
+
+\begin{block}{进阶挑战答案}
+\begin{lstlisting}[language=Python]
+print(num[::2])    # 偶数索引
+inv = num[::-1]
+print(num[5:15:3]) # 步长3
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\section{列表操作符}
+\begin{frame}[fragile]{列表的操作符}
+\begin{block}{列表的运算符重载}
+\begin{tabular}{|l|l|p{3cm}|}
+\hline
+\textcolor{cuhksz1}{表达式} & \textcolor{cuhksz1}{结果} & \textcolor{cuhksz1}{描述} \\ \hline
+\lstinline|[1,2,3] + [4,5]| & [1,2,3,4,5] & 列表拼接（组合）\\ \hline
+\lstinline|['A'] * 3| & ['A','A','A'] & 列表重复\\ \hline
+\lstinline|3 in [1,2,3]| & True & 成员检测\\ \hline
+\lstinline|for x in [1,2,3]: print(x)| & 1 2 3 & 迭代遍历\\ \hline
+\end{tabular}
+\end{block}
+\end{frame}
+
+\section{列表的函数}
+\begin{frame}[fragile]{列表的三大核心函数}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{block}{基础函数}
+\begin{tabular}{|l|l|}
+\hline
+\textcolor{cuhksz2}{函数} & \textcolor{cuhksz2}{功能} \\ \hline
+\lstinline|len()| & 获取元素个数 \\ \hline
+\lstinline|max()| & 找最大值 \\ \hline
+\lstinline|min()| & 找最小值 \\ \hline
+\end{tabular}
+\end{block}
+
+\column{0.6\textwidth}
+\begin{exampleblock}{实战应用}
+\begin{lstlisting}[language=Python]
+成绩 = [88, 92, 79, 95]
+print("人数:", len(成绩))
+print("最高分:", max(成绩))
+print("最低分:", min(成绩))
+\end{lstlisting}
+\end{exampleblock}
+\end{columns}
+
+\begin{alertblock}{注意}
+\begin{itemize}
+\item 混合类型列表比较需谨慎
+\item 空列表调用 $\texttt{max/min}$ 会报错
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{综合挑战}
+\begin{block}{挑战1：密码生成器}
+\begin{lstlisting}[language=Python]
+片段 = ['A','2','#']
+密码 = 片段 * 2 + ['9','z']
+print("".join(密码))  # 输出应该是？
+\end{lstlisting}
+\end{block}
+
+\begin{block}{挑战2：成绩分析}
+\begin{lstlisting}[language=Python]
+成绩单 = [85, 92, 78] + [90, 88]
+print("平均:", sum(成绩单)/len(成绩单))
+print("差距:", max(成绩单)-min(成绩单))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\section{列表常用方法}
+
+\begin{frame}[fragile]{列表的超级工具箱}
+
+\begin{block}{$\texttt{append()}$ - 添加元素}
+\begin{lstlisting}[language=Python]
+购物车 = []
+购物车.append("牛奶")
+购物车.append("面包")
+# ['牛奶', '面包']
+\end{lstlisting}
+\end{block}
+
+\begin{block}{$\texttt{count()}$ - 元素计数}
+\begin{lstlisting}[language=Python]
+成绩 = [85, 90, 85, 88, 90, 85]
+print(成绩.count(85))  # 输出 3
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{列表的超级工具箱}
+
+\begin{block}{$\texttt{index()}$ - 查找位置}
+\begin{lstlisting}[language=Python]
+水果 = ["苹果","香蕉","橙子"]
+print(水果.index("香蕉"))  # 输出 1
+# 找不到会引发ValueError
+\end{lstlisting}
+\end{block}
+
+\begin{block}{$\texttt{pop()}$ - 移除元素}
+\begin{lstlisting}[language=Python]
+待办事项 = ["作业","购物","洗衣"]
+完成 = 待办事项.pop(1) 
+# 完成="购物", 剩余=["作业","洗衣"]
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{列表的超级工具箱}
+
+\begin{block}{$\texttt{remove()}$ - 删除匹配项}
+\begin{lstlisting}[language=Python]
+宠物 = ["狗","猫","鸟","猫"]
+宠物.remove("猫")  
+print (宠物) # ["狗","鸟","猫"]
+# 只删除第一个匹配项
+\end{lstlisting}
+\end{block}
+
+\begin{block}{$\texttt{reverse()}$ - 反转列表}
+\begin{lstlisting}[language=Python]
+数字 = [1,2,3,4]
+数字.reverse()
+print(数字)  # [4,3,2,1]
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{列表的超级工具箱}
+
+\begin{block}{$\texttt{sort()}$ - 列表排序}
+\begin{lstlisting}[language=Python]
+成绩 = [88, 92, 75, 85]
+成绩.sort()  # 默认升序
+print(成绩)  # [75, 85, 88, 92]
+\end{lstlisting}
+\end{block}
+
+\begin{block}{$\texttt{pop()}$ vs $\texttt{remove()}$}
+\begin{tabular}{|l|l|l|}
+\hline
+\textcolor{cuhksz1}{方法} & \textcolor{cuhksz1}{参数} & \textcolor{cuhksz1}{返回值} \\ \hline
+pop() & 索引(可选) & 被移除的元素 \\ \hline
+remove() & 元素值 & None \\ \hline
+\end{tabular}
+\end{block}
+\end{frame}
+
+
+\end{document}
